@@ -1,4 +1,4 @@
-```markdown
+
 # ShortURL Service
 
 This project is a URL shortening service built with Spring Boot. It provides endpoints to create, retrieve, update, and delete shortened URLs.
@@ -14,7 +14,7 @@ This project is a URL shortening service built with Spring Boot. It provides end
   {
     "url": "https://www.example.com/some/long/url"
   }
-  ```
+
 - **Response:**
   ```json
   {
