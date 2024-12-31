@@ -9,4 +9,6 @@ public interface UrlService {
 
     UrlDTO saveUrl(PostUrlDTO url);
     Optional<UrlDTO> getUrlbyShortCode(String shortCode);
+    UrlDTO updateUrl(String shortCode, PostUrlDTO url);
+    void deleteUrl(String shortCode);
 }

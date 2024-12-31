@@ -61,6 +61,46 @@ public class UrlServiceImpl implements UrlService {
                 });
     }
 
+    @Override
+    public UrlDTO updateUrl(String shortCode, PostUrlDTO url) {
+        LocalDateTime updatedTime = getCurrentTime();
+
+        var urlEntity = urlRepository.findByShortCode(shortCode)
+                .orElseThrow(() -> new NotFound("Short code not found"));
+
+        urlEntity.setUrl(url.url());
+        urlEntity.setUpdatedAt(updatedTime);
+
+        urlRepository.save(urlEntity);
+
+        return new UrlDTO(
+                urlEntity.getId(),
+                urlEntity.getUrl(),
+                urlEntity.getShortCode(),
+                urlEntity.getCreatedAt(),
+                urlEntity.getUpdatedAt()
+        );
+    }
+
+    @Override
+    public void deleteUrl(String shortCode) {
+//        var urlEntity = urlRepository.findByShortCode(shortCode)
+//                .orElseThrow(() -> new NotFound("Short code not found"));
+//
+//        Long deleted = urlRepository.deleteByShortCode(shortCode);
+//
+//        if (deleted == 0) {
+//            throw new NotFound("Short code not found");
+//        }
+        Optional<Url> urlEntity = urlRepository.findByShortCode(shortCode);
+
+        if (urlEntity.isPresent()) {
+            urlRepository.deleteByShortCode(shortCode);
+        } else {
+            throw new RuntimeException("Short code not found");
+        }
+    }
+
     private String generateShortCode() {
         HashSet<String> shortCodes = new HashSet<>();
         Random random = new Random();
