@@ -28,7 +28,7 @@ This project is a URL shortening service built with Spring Boot. It provides end
 
 ### Retrieve a URL by Short Code
 
-- **URL:** `/shorten?shortCode=OAP926`
+- **URL:** `/shorten?shortCode={shortCode}`
 - **Method:** `GET`
 - **Request Parameters:**
   - `shortCode` (required): The short code of the URL to retrieve.
