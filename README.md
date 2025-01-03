@@ -3,10 +3,6 @@
 
 This project is a URL shortening service built with Spring Boot. It provides endpoints to create, retrieve, update, and delete shortened URLs.
 
-## Swagger Documentation
-
-**[Access the Swagger UI here](http://localhost:8080/swagger-ui.html)**
-
 ## Endpoints
 
 ### Create a Shortened URL
