@@ -33,7 +33,6 @@ public class TratadorErrores {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
-
     private record DatosErrorValidacion(
             String campo,
             String error

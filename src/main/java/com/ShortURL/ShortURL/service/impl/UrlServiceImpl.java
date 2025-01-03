@@ -3,12 +3,14 @@ package com.ShortURL.ShortURL.service.impl;
 import com.ShortURL.ShortURL.exception.NotFound;
 import com.ShortURL.ShortURL.persistence.entity.Url;
 import com.ShortURL.ShortURL.persistence.repository.UrlRepository;
+import com.ShortURL.ShortURL.presentation.dto.CountUrlDTO;
 import com.ShortURL.ShortURL.presentation.dto.PostUrlDTO;
 import com.ShortURL.ShortURL.presentation.dto.UrlDTO;
 import com.ShortURL.ShortURL.service.UrlService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;
@@ -17,6 +19,7 @@ import java.util.Random;
 public class UrlServiceImpl implements UrlService {
 
     private final UrlRepository urlRepository;
+    HashMap<String, Long> count = new HashMap<>();
 
     public UrlServiceImpl(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
@@ -99,6 +102,29 @@ public class UrlServiceImpl implements UrlService {
         } else {
             throw new RuntimeException("Short code not found");
         }
+    }
+
+    @Override
+    public Optional<CountUrlDTO> countUrl(String shortCode) {
+
+        if (count.containsKey(shortCode)) {
+            count.put(shortCode, count.get(shortCode) + 1);
+        } else {
+            count.put(shortCode, 1L);
+        }
+
+        return urlRepository.findByShortCode(shortCode)
+                .map(urlEntity -> new CountUrlDTO(
+                        urlEntity.getId(),
+                        urlEntity.getUrl(),
+                        urlEntity.getShortCode(),
+                        urlEntity.getCreatedAt(),
+                        urlEntity.getUpdatedAt(),
+                        count.get(shortCode)
+                ))
+                .or(() -> {
+                    throw new NotFound("Short code not found");
+                });
     }
 
     private String generateShortCode() {

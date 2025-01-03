@@ -3,6 +3,10 @@
 
 This project is a URL shortening service built with Spring Boot. It provides endpoints to create, retrieve, update, and delete shortened URLs.
 
+## Swagger Documentation
+
+**[Access the Swagger UI here](http://localhost:8080/swagger-ui.html)**
+
 ## Endpoints
 
 ### Create a Shortened URL
@@ -80,6 +84,28 @@ This project is a URL shortening service built with Spring Boot. It provides end
   - `shortCode` (required): The short code of the URL to delete.
 - **Response:**
   - Status: `204 No Content`
+- **Error Response:**
+  - Status: `404 Not Found`
+  - Body: `"Short code not found"`
+
+### Count URL by Short Code
+
+- **URL:** `/shorten/count/{shortCode}`
+- **Method:** `GET`
+- **Request Parameters:**
+  - `shortCode` (required): The short code of the URL to count.
+
+- **Response:**
+  ```json
+  {
+    "id": 1,
+    "url": "https://www.example.com/some/long/url",
+    "shortCode": "QVR667",
+    "createdAt": "2024-12-29T19:11:27.8634857",
+    "updatedAt": "2024-12-29T19:11:27.8634857",
+    "count": 1
+  }
+  ```
 - **Error Response:**
   - Status: `404 Not Found`
   - Body: `"Short code not found"`

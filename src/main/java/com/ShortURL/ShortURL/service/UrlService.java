@@ -1,5 +1,6 @@
 package com.ShortURL.ShortURL.service;
 
+import com.ShortURL.ShortURL.presentation.dto.CountUrlDTO;
 import com.ShortURL.ShortURL.presentation.dto.PostUrlDTO;
 import com.ShortURL.ShortURL.presentation.dto.UrlDTO;
 
@@ -11,4 +12,5 @@ public interface UrlService {
     Optional<UrlDTO> getUrlbyShortCode(String shortCode);
     UrlDTO updateUrl(String shortCode, PostUrlDTO url);
     void deleteUrl(String shortCode);
+    Optional<CountUrlDTO> countUrl(String shortCode);
 }
