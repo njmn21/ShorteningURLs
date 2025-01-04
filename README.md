@@ -3,6 +3,8 @@
 
 This project is a URL shortening service built with Spring Boot. It provides endpoints to create, retrieve, update, and delete shortened URLs.
 
+https://github.com/njmn21/ShorteningURLs
+
 ## Endpoints
 
 ### Create a Shortened URL
